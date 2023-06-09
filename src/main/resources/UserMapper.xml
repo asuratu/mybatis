@@ -10,6 +10,18 @@
     <select id="findUserById" resultType="com.feng.model.User">
         <!-- #{id} 相当于预处理的占位符 ? -->
         <!-- 其实就是接口的参数列表的值  -->
+        <!-- 查询返回的结果集, 会自动封装到 User 对象中 -->
+        <!-- 但是 ORM 自动封装的前提的是: 返回的列名和 User 类的属性名一致 -->
         select * from user where id = #{id}
+    </select>
+
+    <!-- 虽然返回的是集合, 但是此处的 resultType 依然是集合中存储的数据类型, User -->
+    <select id="findAllUser" resultType="com.feng.model.User">
+        <!-- 绑定多个参数 -->
+        <!-- 1. #{} 内按顺序填写 param1, param2, param3... -->
+<!--        select * from user where balance &lt; #{param1} and nickname like #{param2}-->
+        <!-- 2. 在 findAllUser 的形参 使用 @Param 注解, 指定参数名 -->
+        select * from user where balance &lt; #{balance} and nickname like #{nickname}
+
     </select>
 </mapper>
