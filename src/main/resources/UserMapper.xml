@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feng.mapper.UserMapper">
+    <!-- select 用于查询单条数据 -->
+    <!-- id: 是接口中的方法名 -->
+    <!-- resultType: 是返回值类型 -->
+    <!-- 要写完整的类路径 -->
+    <select id="findUserById" resultType="com.feng.model.User">
+        <!-- #{id} 相当于预处理的占位符 ? -->
+        <!-- 其实就是接口的参数列表的值  -->
+        select * from user where id = #{id}
+    </select>
+</mapper>
