@@ -41,6 +41,16 @@
             <artifactId>mybatis</artifactId>
             <version>3.5.11</version>
         </dependency>
+        <!-- 单元测试 -->
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.0-M1</version>
+            <!-- 使用范围: test 是只在测试时使用 -->
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 
