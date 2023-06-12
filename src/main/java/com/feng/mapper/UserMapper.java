@@ -3,6 +3,7 @@ package com.feng.mapper;
 import com.feng.model.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,4 +16,9 @@ public interface UserMapper {
 
     List<User> findAllUser(@Param("balance") double balance, @Param("nickname") String nickname);
 
+    List<User> findUserByLoginMap(HashMap<String, Object> map);
+
+    boolean updateUser(User user);
+
+    boolean insertUser(User user);
 }

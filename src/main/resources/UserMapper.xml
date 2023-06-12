@@ -19,9 +19,28 @@
     <select id="findAllUser" resultType="com.feng.model.User">
         <!-- 绑定多个参数 -->
         <!-- 1. #{} 内按顺序填写 param1, param2, param3... -->
-<!--        select * from user where balance &lt; #{param1} and nickname like #{param2}-->
+        <!--        select * from user where balance &lt; #{param1} and nickname like #{param2}-->
         <!-- 2. 在 findAllUser 的形参 使用 @Param 注解, 指定参数名 -->
         select * from user where balance &lt; #{balance} and nickname like #{nickname}
-
     </select>
+
+    <!-- findUserByLoginMap -->
+    <select id="findUserByLoginMap" resultType="com.feng.model.User">
+        <!-- 参数是 map, #{} 内写 map 的 key -->
+        select * from user where passport = #{passport} and password = #{password}
+    </select>
+
+    <!-- insertUser -->
+    <insert id="insertUser" parameterType="com.feng.model.User" useGeneratedKeys="true" keyProperty="id">
+        <!-- 1. #{} 内写 User 对象的属性名 -->
+        <!-- 2. 如果是自增主键, 需要在 insert 标签中添加 useGeneratedKeys="true" keyProperty="id" -->
+        insert into user (passport, password, nickname, balance) values (#{passport}, #{password}, #{nickname},
+        #{balance})
+    </insert>
+
+    <!-- updateUser -->
+    <update id="updateUser" parameterType="com.feng.model.User">
+        update user set passport = #{passport}, password = #{password}, nickname = #{nickname}, balance = #{balance}
+        where id = #{id}
+    </update>
 </mapper>
