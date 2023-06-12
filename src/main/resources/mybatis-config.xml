@@ -18,6 +18,14 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 
+    <!-- 设置别名 -->
+    <typeAliases>
+        <!-- type: 指定别名的类型 -->
+        <!-- alias: 指定别名 -->
+        <typeAlias type="com.feng.model.User" alias="User"/>
+    </typeAliases>
+
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
