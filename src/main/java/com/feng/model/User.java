@@ -1,5 +1,6 @@
 package com.feng.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -88,13 +89,17 @@ public class User {
     // 重写 toString 方法
     @Override
     public String toString() {
+        // 格式化 createAt
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String createAt = simpleDateFormat.format(this.createAt);
+        String updateAt = simpleDateFormat.format(this.updateAt);
         return "User{" +
                 "id=" + id + ", " +
                 "passport='" + passport + '\'' + ", " +
                 "password='" + password + '\'' + ", " +
                 "nickname='" + nickname + '\'' + ", " +
-                "createAt=" + createAt + ", " +
-                "updateAt=" + updateAt + ", " +
+                "createAt='" + createAt + '\'' + ", " +
+                "updateAt='" + updateAt + '\'' + ", " +
                 "balance=" + balance +
                 '}';
     }

@@ -5,8 +5,19 @@
 <configuration>
     <!-- 核心配置文件 -->
 
-    <properties resource="dbconfig.properties">
+    <properties resource="db.properties">
     </properties>
+
+    <!-- 顺序不能变!!!! -->
+    <settings>
+        <!-- 打印 sql 语句 -->
+        <!--        <setting name="logImpl" value="STDOUT_LOGGING"/>-->
+        <!-- LOG4J2 -->
+        <setting name="logImpl" value="LOG4J2"/>
+        <!-- 开启驼峰命名 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -22,6 +33,6 @@
     <mappers>
         <!-- 加载映射文件 -->
         <!-- 开头不能加 / -->
-         <mapper resource="UserMapper.xml"/>
+        <mapper resource="UserMapper.xml"/>
     </mappers>
 </configuration>
