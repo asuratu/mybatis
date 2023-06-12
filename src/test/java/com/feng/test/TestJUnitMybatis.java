@@ -2,6 +2,8 @@ package com.feng.test;
 
 import com.feng.mapper.UserMapper;
 import com.feng.model.User;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -61,12 +63,23 @@ public class TestJUnitMybatis {
             // 利用动态代理技术, 获取到 UserMapper 的代理对象
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
+            // 使用插件分页
+            PageHelper.startPage(2, 2);
+
             // 调用代理对象的方法
             List<User> allUser = userMapper.findAllUser(1000, "feng");
+
+            // 后续获得分页信息
+            PageInfo<User> userPageInfo = new PageInfo<>(allUser);
+
+            System.out.println(userPageInfo);
+
             System.out.println("共计: " + allUser.size() + " 条数据");
+
             for (User user : allUser) {
                 System.out.println(user);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
