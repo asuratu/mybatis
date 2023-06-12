@@ -2,6 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 通过 namespace 指定映射文件对应的接口 -->
+
 <mapper namespace="com.feng.mapper.UserMapper">
     <!-- select 用于查询单条数据 -->
     <!-- id: 是接口中的方法名 -->
@@ -12,6 +14,7 @@
         <!-- 其实就是接口的参数列表的值  -->
         <!-- 查询返回的结果集, 会自动封装到 User 对象中 -->
         <!-- 但是 ORM 自动封装的前提的是: 返回的列名和 User 类的属性名一致 -->
+        <!-- 如果不一致, 需要使用别名 -->
         select * from user where id = #{id}
     </select>
 
@@ -34,13 +37,13 @@
     <insert id="insertUser" parameterType="com.feng.model.User" useGeneratedKeys="true" keyProperty="id">
         <!-- 1. #{} 内写 User 对象的属性名 -->
         <!-- 2. 如果是自增主键, 需要在 insert 标签中添加 useGeneratedKeys="true" keyProperty="id" -->
-        insert into user (passport, password, nickname, balance) values (#{passport}, #{password}, #{nickname},
-        #{balance})
+        insert into user (passport, password, nickname, balance, create_at, update_at) values (#{passport}, #{password},
+        #{nickname}, #{balance}, now(), now())
     </insert>
 
     <!-- updateUser -->
     <update id="updateUser" parameterType="com.feng.model.User">
-        update user set passport = #{passport}, password = #{password}, nickname = #{nickname}, balance = #{balance}
-        where id = #{id}
+        update user set passport = #{passport}, password = #{password}, nickname = #{nickname}, balance = #{balance},
+        update_at = now() where id = #{id}
     </update>
 </mapper>

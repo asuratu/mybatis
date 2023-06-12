@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * @author AsuraTu
  */
-public class TestJUnitMybatis extends Base {
+public class TestJUnitMybatis {
 
     SqlSessionFactory sqlSessionFactory = null;
 
@@ -98,6 +98,8 @@ public class TestJUnitMybatis extends Base {
     @Test
     public void testInsertUser() throws IOException {
         // 获取 SqlSession 对象
+        // openSession() 方法默认是不自动提交事务的
+        // 如果要自动提交事务, 需要传入一个 boolean 类型的参数 true, 如: openSession(true)
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             // 利用动态代理技术, 获取到 UserMapper 的代理对象
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -112,6 +114,7 @@ public class TestJUnitMybatis extends Base {
             // 调用代理对象的方法
             boolean insertUser = userMapper.insertUser(user);
             System.out.println(insertUser);
+            // 提交事务, 默认是不自动提交事务的
             sqlSession.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -128,7 +131,7 @@ public class TestJUnitMybatis extends Base {
 
             // 创建一个 Map, 用于存放登录信息
             User user = new User();
-            user.setId(1);
+            user.setId(3);
             user.setNickname("feng1");
             user.setPassport("admin11");
             user.setPassword("111");
