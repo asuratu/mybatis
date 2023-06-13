@@ -8,16 +8,47 @@
     <!-- select 用于查询单条数据 -->
     <!-- id: 是接口中的方法名 -->
     <!-- resultType: 是返回值类型 -->
-    <!-- 要写完整的类路径 -->
-    <select id="findUserById" resultType="User">
+
+    <!-- 这里的 resultType="User" 是用于自动封装的 -->
+    <!--    <select id="findUserById" resultType="User"> -->
+    <!-- 使用手动映射时, resultType 就不需要了, 换成 resultMap -->
+    <select id="findUserById" resultMap="userResultMap">
         <!-- #{id} 相当于预处理的占位符 ? -->
         <!-- 参数的类型可以是: 基本类型, 包装类型, String, Date, 枚举, 数组, 集合 -->
         <!-- 其实就是接口的参数列表的值  -->
         <!-- 查询返回的结果集, 会自动封装到 User 对象中 -->
+
         <!-- 但是 ORM 自动封装的前提的是: 返回的列名和 User 类的属性名一致 -->
         <!-- 如果不一致, 需要使用别名 -->
-        select * from user where id = #{id}
+        <!--        select * from user where id = #{id}-->
+        SELECT
+        id uid,
+        passport pst,
+        password pwd,
+        nickname name,
+        balance blc,
+        create_at,
+        update_at
+        FROM
+        user
+        WHERE
+        id = #{id}
     </select>
+
+    <!-- 当自动封装失败, 就是用 resultMap -->
+    <!-- resultMap 的 id 是唯一标识, 不能重复 -->
+    <!-- type 是要封装的类型 -->
+    <resultMap id="userResultMap" type="User">
+        <!-- id 是唯一标识, 不能重复 -->
+        <!-- column 是数据库中的列名 -->
+        <!-- property 是 User 类中的属性名 -->
+        <id column="uid" property="id"/>
+        <result column="pst" property="passport"/>
+        <result column="pwd" property="password"/>
+        <result column="name" property="nickname"/>
+        <result column="blc" property="balance"/>
+    </resultMap>
+
 
     <!-- 虽然返回的是集合, 但是此处的 resultType 依然是集合中存储的数据类型, User -->
     <select id="findAllUser" resultType="User">

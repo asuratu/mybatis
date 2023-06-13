@@ -8,8 +8,6 @@
     <artifactId>day56_mybatis</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <packaging>war</packaging>
-
     <properties>
         <maven.compiler.source>20</maven.compiler.source>
         <maven.compiler.target>20</maven.compiler.target>
@@ -79,5 +77,20 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <!--IDEA的maven项目中，默认源代码(java)目录下的xml等资源文件并不会在编译的时候一块打包进classes文件夹，而是直接舍弃掉。
+            方法1：将xml或properties等配置文件放到resource下，并修改获取配置文件的代码，比如注册mapper.xml的位置等；
+            方法2：在maven中添加过滤：将java下的xml过滤-->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>*.xml</include><!-- 默认（新添加自定义则失效） -->
+                    <include>**/*.xml</include><!-- 新添加 */代表1级目录 **/代表多级目录 -->
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
 
 </project>

@@ -25,7 +25,7 @@ public class TestJUnitMybatis {
     SqlSessionFactory sqlSessionFactory = null;
 
     @BeforeEach // BeforeEach 注解表示在每个测试方法执行之前都会执行一次
-    public void prepare() throws IOException {
+    public void init() throws IOException {
         System.out.println("准备工作");
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
