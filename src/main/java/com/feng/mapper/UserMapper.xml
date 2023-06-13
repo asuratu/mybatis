@@ -49,6 +49,44 @@
         <result column="blc" property="balance"/>
     </resultMap>
 
+    <select id="findUserWithGoodsById" resultMap="userWithGoodsListResultMap">
+        SELECT
+        u.*,
+        g.id gid,
+        g.user_id,
+        g.name,
+        g.description,
+        g.create_at g_create_at
+        FROM
+        goods g
+        JOIN user u ON u.id = g.user_id
+        WHERE
+        u.id = #{id}
+    </select>
+
+    <resultMap id="userWithGoodsListResultMap" type="UserVO" autoMapping="true">
+        <!-- 封装查询主体 User: -->
+        <id column="id" property="id"/>
+        <!-- resultMap 设置了 autoMapping="true", 自动映射同名列 -->
+        <!--        <result column="passport" property="passport"/>-->
+        <!--        <result column="nickname" property="nickname"/>-->
+        <!--        <result column="balance" property="balance"/>-->
+        <!--        <result column="create_at" property="createAt"/>-->
+        <!--        <result column="update_at" property="updateAt"/>-->
+
+        <!-- 一对多关联映射使用 collection 标签 -->
+        <!-- property 是 UserVO 类中关联的属性 -->
+        <!-- 不是 javaType, 是 ofType,是指定集合中存储的数据类型 -->
+        <collection property="goodsList" ofType="com.feng.model.Goods" autoMapping="true">
+            <!-- id标签,用来映射主键列 -->
+            <!-- 这里的主键要使用别名, 不然只会显示一条数据 -->
+            <id column="gid" property="id"/>
+            <!--            <result column="user_id" property="userId"/>-->
+            <!--            <result column="name" property="name"/>-->
+            <!--            <result column="description" property="description"/>-->
+            <result column="g_create_at" property="createAt"/>
+        </collection>
+    </resultMap>
 
     <!-- 虽然返回的是集合, 但是此处的 resultType 依然是集合中存储的数据类型, User -->
     <select id="findAllUser" resultType="User">

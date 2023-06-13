@@ -4,38 +4,17 @@ import com.feng.mapper.UserMapper;
 import com.feng.model.User;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 
 /**
  * @author AsuraTu
  */
-public class TestJUnitMybatis {
-
-    SqlSessionFactory sqlSessionFactory = null;
-
-    @BeforeEach // BeforeEach 注解表示在每个测试方法执行之前都会执行一次
-    public void init() throws IOException {
-        System.out.println("准备工作");
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    }
-
-    @AfterEach // AfterEach 注解表示在每个测试方法执行之后都会执行一次
-    public void after() {
-        System.out.println("收尾工作");
-    }
+public class TestJUnitMybatis extends BaseTest {
 
     @Test
     public void testFindUserById() throws IOException {

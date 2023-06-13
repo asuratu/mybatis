@@ -11,7 +11,7 @@
         <!-- 级别包括: debug, info, warn, error, fatal -->
 
         <!-- 只有这个包下的日志才会被打印 -->
-        <Logger name="com.feng.mapper.UserMapper" level="debug"/>
+        <Logger name="com.feng.mapper" level="debug"/>
         <!-- Root 是所有日志的根节点 -->
         <Root level="error">
             <!-- stdout 是输出到控制台 -->

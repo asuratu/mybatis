@@ -1,6 +1,7 @@
 package com.feng.mapper;
 
 import com.feng.model.User;
+import com.feng.model.UserVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.HashMap;
@@ -21,4 +22,6 @@ public interface UserMapper {
     boolean updateUser(User user);
 
     boolean insertUser(User user);
+
+    UserVO findUserWithGoodsById(int id);
 }

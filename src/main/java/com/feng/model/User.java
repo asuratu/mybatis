@@ -1,6 +1,7 @@
 package com.feng.model;
 
-import java.text.SimpleDateFormat;
+import com.feng.util.TransformDate;
+
 import java.util.Date;
 
 /**
@@ -89,19 +90,29 @@ public class User {
     // 重写 toString 方法
     @Override
     public String toString() {
-        // 格式化日期
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String createAt = simpleDateFormat.format(this.createAt);
-        String updateAt = simpleDateFormat.format(this.updateAt);
+        // 为 null 的字段不显示
+        String result = "User{" +
+                "id=" + id + ", ";
+        if (passport != null) {
+            result += "passport='" + passport + '\'' + ", ";
+        }
+        if (password != null) {
+            result += "password='" + password + '\'' + ", ";
+        }
+        if (nickname != null) {
+            result += "nickname='" + nickname + '\'' + ", ";
+        }
+        if (createAt != null) {
+            result += "createAt='" + TransformDate.dateToString(createAt) + '\'' + ", ";
+        }
+        if (updateAt != null) {
+            result += "updateAt='" + TransformDate.dateToString(updateAt) + '\'' + ", ";
+        }
+        if (balance != null) {
+            result += "balance=" + balance;
+        }
+        result += '}';
 
-        return "User{" +
-                "id=" + id + ", " +
-                "passport='" + passport + '\'' + ", " +
-                "password='" + password + '\'' + ", " +
-                "nickname='" + nickname + '\'' + ", " +
-                "createAt='" + createAt + '\'' + ", " +
-                "updateAt='" + updateAt + '\'' + ", " +
-                "balance=" + balance +
-                '}';
+        return result;
     }
 }
