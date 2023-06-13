@@ -7,27 +7,30 @@
 <mapper namespace="com.feng.mapper.GoodsMapper">
     <select id="findGoodsById" resultType="Goods">
         SELECT
-        *
-        FROM
-        goods
+        <!-- 引入 sql 片段 -->
+        <include refid="goodsColumns"/>
         WHERE
-        id = #{id}
+        g.id = #{id}
     </select>
 
-    <!-- findGoodsWithUserById -->
-    <select id="findGoodsWithUserById" resultMap="goodsWithUserResultMap">
-        SELECT
+    <!-- 将 sql 中重复的部分抽取出来, 作为一个 sql 片段 -->
+    <sql id="goodsColumns">
         g.id,
         g.user_id,
         g.name,
         g.description,
         g.create_at,
-        g.update_at,
+        g.update_at
+        FROM goods g
+    </sql>
+
+    <!-- findGoodsWithUserById -->
+    <select id="findGoodsWithUserById" resultMap="goodsWithUserResultMap">
+        SELECT
         u.id uid,
         u.nickname,
-        u.balance
-        FROM
-        goods g
+        u.balance,
+        <include refid="goodsColumns"/>
         JOIN user u ON g.user_id = u.id
         WHERE
         g.id = #{id}
