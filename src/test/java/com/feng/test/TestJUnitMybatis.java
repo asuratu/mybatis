@@ -254,6 +254,10 @@ public class TestJUnitMybatis extends BaseTest {
             e.printStackTrace();
         }
 
+        // Cache Hit Ratio [com.feng.mapper.UserMapper]: 0.0 表示命中率是 0/1
+
+        System.out.println("--------------------");
+
         try (SqlSession sqlSession2 = sqlSessionFactory.openSession()) {
             UserMapper userMapper2 = sqlSession2.getMapper(UserMapper.class);
             User user2 = userMapper2.findUserById(4);
@@ -263,6 +267,8 @@ public class TestJUnitMybatis extends BaseTest {
         }
 
         // Cache Hit Ratio [com.feng.mapper.UserMapper]: 0.5 表示命中率是 1/2
+
+        System.out.println("--------------------");
 
         try (SqlSession sqlSession2 = sqlSessionFactory.openSession()) {
             UserMapper userMapper2 = sqlSession2.getMapper(UserMapper.class);
@@ -274,9 +280,44 @@ public class TestJUnitMybatis extends BaseTest {
 
         // Cache Hit Ratio [com.feng.mapper.UserMapper]: 0.6666 表示命中率是 2/3
 
+        System.out.println("--------------------");
 
         // 从控制台可以看出, 第二次查询的时候, 没有发送 SQL 语句, 而是直接从缓存中获取的数据
         // 说明二级缓存生效了
+
+        try (SqlSession sqlSession1 = sqlSessionFactory.openSession(true)) {
+            UserMapper userMapper = sqlSession1.getMapper(UserMapper.class);
+
+            // 创建一个 Map, 用于存放登录信息
+            User user = new User();
+            user.setId(4);
+            user.setNickname("feng4");
+            user.setPassport("admin11");
+            user.setPassword("111");
+            user.setBalance(1000.0);
+
+            // 调用代理对象的方法
+            boolean updateUser = userMapper.updateUser(user);
+            System.out.println(updateUser);
+
+            // 一定要记得提交事务, 除非你设置了自动提交事务 sqlSessionFactory.openSession(true)
+//            sqlSession1.commit(); // 提交事务
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("--------------------");
+
+        try (SqlSession sqlSession2 = sqlSessionFactory.openSession()) {
+            UserMapper userMapper2 = sqlSession2.getMapper(UserMapper.class);
+            User user2 = userMapper2.findUserById(4);
+            System.out.println(user2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Cache Hit Ratio [com.feng.mapper.UserMapper]: 0.5  表示命中率是 2/4
     }
 
     // Java 中有 类似 laravel 的模型事件吗
