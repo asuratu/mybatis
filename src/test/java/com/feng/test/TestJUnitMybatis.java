@@ -7,7 +7,6 @@ import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.List;
 public class TestJUnitMybatis extends BaseTest {
 
     @Test
-    public void testFindUserById() throws IOException {
+    public void testFindUserById() {
         // 获取 SqlSession 对象
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             // 利用动态代理技术, 获取到 UserMapper 的代理对象
@@ -37,7 +36,7 @@ public class TestJUnitMybatis extends BaseTest {
     }
 
     @Test
-    public void findAllUser() throws IOException {
+    public void findAllUser() {
         // 获取 SqlSession 对象
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             // 利用动态代理技术, 获取到 UserMapper 的代理对象
@@ -66,7 +65,7 @@ public class TestJUnitMybatis extends BaseTest {
     }
 
     @Test
-    public void TestFindUserByLoginMap() throws IOException {
+    public void TestFindUserByLoginMap() {
         // 获取 SqlSession 对象
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             // 利用动态代理技术, 获取到 UserMapper 的代理对象
@@ -89,7 +88,7 @@ public class TestJUnitMybatis extends BaseTest {
     }
 
     @Test
-    public void testInsertUser() throws IOException {
+    public void testInsertUser() {
         // 获取 SqlSession 对象
         // openSession() 方法默认是不自动提交事务的
         // 如果要自动提交事务, 需要传入一个 boolean 类型的参数 true, 如: openSession(true)
@@ -116,7 +115,7 @@ public class TestJUnitMybatis extends BaseTest {
     }
 
     @Test
-    public void testUpdateUser() throws IOException {
+    public void testUpdateUser() {
         // 获取 SqlSession 对象
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             // 利用动态代理技术, 获取到 UserMapper 的代理对象
