@@ -24,4 +24,6 @@ public interface UserMapper {
     boolean insertUser(User user);
 
     UserVO findUserWithGoodsById(int id);
+
+    boolean deleteUserByIdList(List<Integer> idList);
 }

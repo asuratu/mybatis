@@ -2,12 +2,15 @@ package com.feng.model;
 
 import com.feng.util.TransformDate;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author asura
  */
-public class User {
+public class User implements Serializable {
+    // Serializable 序列化接口, 使用 二级缓存 必须实现序列化接口
+    // Serializable 作用: 将对象转换为字节序列, 以便在 JVM 中传输和存储
     private Integer id;
     private String passport;
     private String password;

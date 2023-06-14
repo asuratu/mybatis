@@ -5,6 +5,10 @@
 <!-- 通过 namespace 指定映射文件对应的接口 -->
 
 <mapper namespace="com.feng.mapper.UserMapper">
+    <!-- 开启二级缓存 -->
+    <!-- 其实底层在这里设置了一个类, PerpetualCache -->
+    <cache/>
+
     <!-- select 用于查询单条数据 -->
     <!-- id: 是接口中的方法名 -->
     <!-- resultType: 是返回值类型 -->
@@ -116,4 +120,13 @@
         update user set passport = #{passport}, password = #{password}, nickname = #{nickname}, balance = #{balance},
         update_at = now() where id = #{id}
     </update>
+
+    <!-- deleteBatch 批量删除 -->
+    <delete id="deleteUserByIdList">
+        delete from user where id in
+        <!-- collection 这里的参数必须写: list (arg0, collection) 不能是其他 -->
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
