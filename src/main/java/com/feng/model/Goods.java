@@ -2,12 +2,17 @@ package com.feng.model;
 
 import com.feng.util.TransformDate;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author AsuraTu
  */
-public class Goods {
+public class Goods implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private int id;
     private int userId;

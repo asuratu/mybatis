@@ -37,7 +37,7 @@ public class TestGoods extends BaseTest {
     }
 
     @Test
-    public void findUserWithOrders() {
+    public void findUserWithGoods() {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 

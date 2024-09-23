@@ -53,7 +53,6 @@
         </association>
     </resultMap>
 
-
     <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         <!-- 1. #{} 内写 User 对象的属性名 -->
         <!-- 2. 如果是自增主键, 需要在 insert 标签中添加 useGeneratedKeys="true" keyProperty="id" -->
